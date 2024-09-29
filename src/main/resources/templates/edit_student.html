@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Create Student</title>
-</head>
-<body>
-    <h1>Create Student</h1>
-    <form th:action="@{/students}" th:object="${student}" method="post">
+<form th:action="@{/students/{id}(id=${student.id})}" th:object="${student}" method="post">
     <label for="firstName">First Name:</label>
     <input type="text" id="firstName" th:field="*{firstName}" required>
-    
+
     <label for="lastName">Last Name:</label>
     <input type="text" id="lastName" th:field="*{lastName}" required>
-    
+
     <label for="email">Email:</label>
     <input type="email" id="email" th:field="*{email}" required>
-    
-    <button type="submit">Save Student</button>
+
+    <button type="submit">Update Student</button>
 </form>
-    
-</body>
-</html>

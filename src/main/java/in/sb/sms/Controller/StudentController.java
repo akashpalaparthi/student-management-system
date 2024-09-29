@@ -15,7 +15,7 @@ import in.sb.sms.Entity.Student;
 import in.sb.sms.Service.StudentService;
 
 @Controller
-@RequestMapping("/student")
+@RequestMapping("/students")
 public class StudentController {
       @Autowired
 	  private StudentService studentService;
@@ -48,9 +48,14 @@ public class StudentController {
 
       @PostMapping("/{id}")
       public String updateStudent(@PathVariable Long id, @ModelAttribute("student") Student student) {
-          studentService.saveStudent(student);
+          Student existingStudent = studentService.getStudentById(id);
+          existingStudent.setFirstName(student.getFirstName());
+          existingStudent.setLastName(student.getLastName());
+          existingStudent.setEmail(student.getEmail());
+          studentService.saveStudent(existingStudent);
           return "redirect:/students";
       }
+
 
       @GetMapping("/delete/{id}")
       public String deleteStudent(@PathVariable Long id) {
